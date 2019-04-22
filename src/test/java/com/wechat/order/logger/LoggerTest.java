@@ -20,5 +20,6 @@ public class LoggerTest {
         logger.info("this is first logger ......");
         logger.debug("first debug ......");
         System.out.println("添加测试...");
+        System.out.println("拉取测试...");
     }
 }
