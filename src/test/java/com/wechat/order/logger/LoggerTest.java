@@ -19,5 +19,6 @@ public class LoggerTest {
         logger.error("first error ......");
         logger.info("this is first logger ......");
         logger.debug("first debug ......");
+        System.out.println("添加测试...");
     }
 }
