@@ -5,7 +5,6 @@ import com.wechat.order.dao.BuyerOrderDetailsRepository;
 import com.wechat.order.dao.BuyerOrderRepository;
 import com.wechat.order.domaim.BuyerOrderDetails;
 import com.wechat.order.domaim.OrderMaster;
-import com.wechat.order.domaim.OrderMasterPojo;
 import com.wechat.order.domaim.ProductInfo;
 import com.wechat.order.dto.OrderMasterDto;
 import com.wechat.order.dto.StockDto;

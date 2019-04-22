@@ -65,7 +65,7 @@
                                 <#if currentPageData lte 1>
                                     <li class="disabled"><a href="#">上一页</a></li>
                                 <#else >
-                                    <li><a href="/sell/product/seller/searchAllProductBySeller?page=${currentPageData - 1}&size=${currentSizeData}">上一页</a></li>
+                                    <li><a href="/sell/seller/product/searchAllProductBySeller?page=${currentPageData - 1}&size=${currentSizeData}">上一页</a></li>
                                 </#if>
                                 <#list 1..productInfoPageData.getTotalPages() as index>
                                     <#if currentPageData == index>
