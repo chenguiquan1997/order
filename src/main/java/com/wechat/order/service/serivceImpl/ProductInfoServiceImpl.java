@@ -23,6 +23,7 @@ public class ProductInfoServiceImpl implements IProductInfoService {
     private ProductInfoRepository productInfoRepository;
     @Override
     public ProductInfo searchOneById(String productInfoId) {
+
         return productInfoRepository.getOne(productInfoId);
     }
 

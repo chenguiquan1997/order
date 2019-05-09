@@ -29,12 +29,20 @@ public class WechatController {
     private WxMpService wxMpService;
 
     @GetMapping("/authorize")
+    //为什么要加一个回调地址参数？
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //Mp在微信中是公众账号的意思
+        log.info("进入authorize方法。。。。。。");
+        /*
+        * 用户同意授权以后，会找到在微信测试号网页授权模块所设置的回调域名，然后再找到该域名下的一个方法*/
         String url = "http://chenguiquan.natapp1.cc/sell/wechat/userInfo";
-        //构造网页授权url
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_USER_INFO, URLEncoder.encode(returnUrl));
-        return "redirect:" + redirectUrl;
+        /*
+        构造网页授权url
+        第一个参数（url）：为用户授权完成后的重定向链接
+         */
+       String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_USER_INFO, URLEncoder.encode(returnUrl));
+       return "redirect:" + redirectUrl;
+
     }
 
     @GetMapping("/userInfo")
@@ -51,6 +59,9 @@ public class WechatController {
             throw new WechatException(WechatResultEnums.WECHAT_MP_AUTHORIZE_ERROR);
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
+        String accessToken = wxMpOAuth2AccessToken.getAccessToken();
+        log.info("openid={}",openId);
+        log.info("accessToken={}",accessToken);
         return "redirect:" + returnUrl + "?openid=" + openId;
     }
 

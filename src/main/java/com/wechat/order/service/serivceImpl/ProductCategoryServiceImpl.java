@@ -22,6 +22,7 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
 
     @Override
     public List<ProductCategory> findAll() {
+
         return productCategoryRepository.findAll();
     }
 
