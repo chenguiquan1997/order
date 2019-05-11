@@ -13,6 +13,7 @@ import com.wechat.order.enums.BuyerOrderStatusEnums;
 import com.wechat.order.enums.OrderResultEnum;
 import com.wechat.order.exception.OrderException;
 import com.wechat.order.service.IOrderService;
+import com.wechat.order.service.IPayService;
 import com.wechat.order.service.IProductInfoService;
 import com.wechat.order.utils.keyUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,9 @@ public class orderServiceImpl implements IOrderService {
 
     @Autowired
     BuyerOrderRepository buyerOrderRepository;
+
+    @Autowired
+    IPayService payService;
 
     @Override//买家下订单
     @Transactional//该注解为事务控制注解，可以保证在数据库发生异常时，事务回滚
@@ -153,7 +157,7 @@ public class orderServiceImpl implements IOrderService {
        }
         iProductInfoService.increaseStock(stockDtoList);
         //4.如果买家付款，退款给买家
-        //TODO
+        payService.refund(orderMasterDto);
         return orderMasterDto;
     }
 
@@ -178,7 +182,7 @@ public class orderServiceImpl implements IOrderService {
         return orderMasterDto;
     }
 
-    @Override//买家付款
+    @Override//买家付款,支付订单
     @Transactional
     public OrderMasterDto payOrder(OrderMasterDto orderMasterDto) {
         //判断订单状态，如果状态不是新下单，则抛异常
